@@ -40,6 +40,8 @@ dependencies {
     def rxlifecycleVersion = "0.6.1"
     compile "com.trello:rxlifecycle-kotlin:$rxlifecycleVersion"
     compile "com.trello:rxlifecycle-components:$rxlifecycleVersion"
+
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
 }
 repositories {
     mavenCentral()
