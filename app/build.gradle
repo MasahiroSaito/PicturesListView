@@ -42,6 +42,7 @@ dependencies {
     compile "com.trello:rxlifecycle-components:$rxlifecycleVersion"
 
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
 }
 repositories {
     mavenCentral()
