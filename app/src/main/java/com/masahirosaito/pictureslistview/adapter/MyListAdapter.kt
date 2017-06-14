@@ -1,4 +1,4 @@
-package com.masahirosaito.pictureslistview
+package com.masahirosaito.pictureslistview.adapter
 
 import android.content.Context
 import android.view.View
