@@ -6,8 +6,10 @@ import android.util.Log
 import android.widget.ListView
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import com.masahirosaito.pictureslistview.adapter.MyListAdapter
 import com.masahirosaito.pictureslistview.client.MyListClient
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         val listView = (findViewById(R.id.list_view) as ListView).apply {
             this.adapter = myListAdapter
         }
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            startActivity(MyListStatusActivity.intent(this, myListAdapter.myLists[position]))
+        }
     }
 
     override fun onResume() {
@@ -42,8 +48,13 @@ class MainActivity : AppCompatActivity() {
             setTokenWithSecret(accessToken, accessTokenSecret)
         }
 
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC
+        }
+
         val client = OkHttpClient.Builder()
                 .addInterceptor(SigningInterceptor(consumer))
+                .addInterceptor(logging)
                 .build()
 
         val gson = GsonBuilder()
